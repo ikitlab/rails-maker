@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-class TestTemplate1 < ::Prologue::TemplateRunner
+class TestTemplate1 < ::RailsMaker::TemplateRunner
   def on_invocation
     return "hi"
   end
 end
 
-class TestTemplate2 < ::Prologue::TemplateRunner
+class TestTemplate2 < ::RailsMaker::TemplateRunner
 end
 
-describe Prologue::TemplateRunner do
+describe RailsMaker::TemplateRunner do
 
   it "should not raise an error if the on_invocation method is implemented" do
     lambda {

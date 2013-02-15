@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby -*-
+
+# Requires
+begin
+  require 'rails-maker'
+rescue LoadError
+  $:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(__FILE__) + '/../lib')
+  require 'rubygems'
+  require 'rails-maker'
+end
+
+# Setup Constants
+RailsMaker::GEM_ROOT = File.expand_path( File.dirname( __FILE__ ) + '/../' )
+
+# Run
+RailsMaker::CLI.start
+

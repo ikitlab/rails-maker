@@ -1,4 +1,4 @@
-module Prologue
+module RailsMaker
 
 	module Errors
 

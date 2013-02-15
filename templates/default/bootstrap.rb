@@ -3,7 +3,7 @@ require "net/https"
 require "uri"
 require 'rbconfig'
 
-say "Building Application with Prologue..."
+say "Building Application with the rails-maker..."
 
 def get_remote_https_file(source, destination)
   uri = URI.parse(source)
@@ -109,9 +109,9 @@ say <<-D
 
   ########################################################################
 
-  Prologue just added like 6 hours to your life.
+  The rails-maker just added like 6 hours to your life.
 
-  Template Installed :: Quick Left Rails 3 Prologue Default
+  Template Installed :: Quick Left Rails 3 the rails-maker Default
 
   Next run...
   rake spec

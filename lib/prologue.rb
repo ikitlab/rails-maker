@@ -1,11 +1,11 @@
-require 'prologue/cli'
-require 'prologue/version'
+require 'rails-maker/cli'
+require 'rails-maker/version'
 
-module Prologue
+module RailsMaker
 
   # Autoloads
-  autoload :Errors , 'prologue/errors'
-  autoload :TemplateRunner , 'prologue/template_runner'
+  autoload :Errors , 'rails-maker/errors'
+  autoload :TemplateRunner , 'rails-maker/template_runner'
 
 end
 

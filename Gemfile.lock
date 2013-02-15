@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    prologue (0.6.0)
+    rails-maker (0.6.0)
       activesupport (~> 3.0.7)
       rails (~> 3.0.7)
       thor (~> 0.14.6)
@@ -105,5 +105,5 @@ DEPENDENCIES
   aruba (~> 0.2.3)
   bundler (~> 1.0.12)
   cucumber (~> 0.9.3)
-  prologue!
+  rails-maker!
   rspec (~> 2.0.0)

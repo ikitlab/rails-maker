@@ -3,7 +3,7 @@ create_file 'spec/factories/user.rb' do
 <<-'FILE'
 Factory.define :user do |u| 
   u.sequence(:name) { |n| "Quick #{n}" }
-  u.sequence(:email) { |n| "user.#{n}@quickleft.com" }
+  u.sequence(:email) { |n| "user.#{n}@ikitlab.com" }
   u.password "password" 
   u.confirmed_at Time.new.to_s
   u.confirmation_sent_at Time.new.to_s
@@ -11,13 +11,13 @@ Factory.define :user do |u|
 end 
 
 Factory.define :admin, :parent => :user do |admin| 
-  admin.email "admin@quickleft.com"
+  admin.email "admin@ikitlab.com"
   admin.password "password" 
   admin.roles { [ Factory(:role, :name => 'Admin') ] }
 end 
 
 Factory.define :member, :parent => :user do |member|
-  member.email "member@quickleft.com"
+  member.email "member@ikitlab.com"
   member.password "password"
   member.roles { [ Factory(:role, :name => 'Member') ] } 
 end
@@ -40,7 +40,7 @@ end
 Given /^a logged in (\w+)$/ do |usertype|
   Factory.create(usertype.to_sym)
   visit(new_user_session_path)
-  fill_in("user[email]", :with => "#{usertype}@quickleft.com")
+  fill_in("user[email]", :with => "#{usertype}@ikitlab.com")
   fill_in("user[password]", :with => "password")
   click_button("Sign in")
 end
@@ -76,13 +76,13 @@ Feature: Forgot password
   Scenario: Follow forget your password link
     Given the following user records
     | email                |
-    | forgot@quickleft.com |
+    | forgot@ikitlab.com |
     When I am on the login page
     And I follow "Forgot your password?"
-    And I fill in "Email" with "forgot@quickleft.com"
+    And I fill in "Email" with "forgot@ikitlab.com"
     And I press "Send me reset password instructions"
     Then I should see "You will receive an email with instructions about how to reset your password in a few minutes."
-    And 1 emails should be delivered to forgot@quickleft.com
+    And 1 emails should be delivered to forgot@ikitlab.com
     When I click the first link in the email
     And I fill in "Password" with "myNewP@ssword"
     And I fill in "Password confirmation" with "myNewP@ssword"
@@ -101,13 +101,13 @@ Feature: Resend Verification
   Scenario: Follow resend verification email
     Given the following user records
     | email                | confirmed_at |
-    | resend@quickleft.com | nil          |
+    | resend@ikitlab.com | nil          |
     When I am on the login page
     And I follow "Didn't receive confirmation instructions?"
-    And I fill in "Email" with "resend@quickleft.com"
+    And I fill in "Email" with "resend@ikitlab.com"
     And I press "Resend confirmation instructions"
     Then I should see "You will receive an email with instructions about how to confirm your account in a few minutes."
-    And 2 emails should be delivered to resend@quickleft.com
+    And 2 emails should be delivered to resend@ikitlab.com
     When I click the first link in the email
     Then I should see "Your account was successfully confirmed. You are now signed in."
 FILE

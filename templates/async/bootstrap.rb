@@ -1,4 +1,4 @@
-say "Building Application with Prologue..."
+say "Building Application with the rails-maker..."
 
 # Some git setup
 git :init
@@ -40,7 +40,7 @@ say <<-D
 
   ########################################################################
 
-  Prologue just added like 6 hours to your life. And it's async too!
+  The rails-maker just added like 6 hours to your life. And it's async too!
 
   Template Installed :: Rails 3 Async
 

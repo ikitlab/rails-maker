@@ -1,8 +1,8 @@
-module Prologue
+module RailsMaker
 
   module Templates
 
-    class Async < Prologue::TemplateRunner
+    class Async < RailsMaker::TemplateRunner
 
       # Descriptions
       desc "Installs an async Rails 3 stack"

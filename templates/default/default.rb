@@ -1,10 +1,10 @@
 require 'active_support/secure_random'
 
-module Prologue
+module RailsMaker
 
   module Templates
 
-    class Default < Prologue::TemplateRunner
+    class Default < RailsMaker::TemplateRunner
 
       # Class Options
       # @see https://github.com/wycats/thor/wiki/Groups
@@ -13,7 +13,7 @@ module Prologue
       class_option :admin , :type => :boolean , :default => true , :banner => "Sets up very basic admin"
 
       # Descriptions
-      desc "Runs the default prologue Rails 3 stack task"
+      desc "Runs the default rails-maker Rails 3 stack task"
 
       # The method to run when the template is invoked
       def on_invocation

@@ -2,7 +2,7 @@ require 'thor'
 require 'thor/actions'
 require 'thor/group'
 
-module Prologue
+module RailsMaker
 
   class TemplateRunner < Thor::Group
 
@@ -21,7 +21,7 @@ module Prologue
     # setup prior to invoking the system command that will construct
     # the project.
     def on_invocation
-      raise Prologue::Errors::TemplateRunnerInvocationNotImplementedError.new("Template did not define an on_invocation method!")
+      raise RailsMaker::Errors::TemplateRunnerInvocationNotImplementedError.new("Template did not define an on_invocation method!")
     end
 
   end

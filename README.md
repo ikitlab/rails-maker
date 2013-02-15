@@ -1,46 +1,46 @@
-Prologue
+The rails-maker
 ===========
 Generate a Rails 3 app with the application templates Quick Left uses to start their projects off right!
 
 
 ### What you get
 
-Prologue provides a set of templates to generate Rails 3 applications.
+The rails-maker provides a set of templates to generate Rails 3 applications.
 Everything is configured and ready to rock your next Rails 3 project.
 We hope it saves you a mess of time!
 
 * Default: A base Rails 3 application with Devise and Cancan for
   authentication and authorization. Roles are stored in the database
   with a HABTM relationship between the role and user models. You also get
-  a basic admin to manage users. Prologue also rolls in all of the things
+  a basic admin to manage users. The rails-maker also rolls in all of the things
   we like to have setup in our apps like: haml, sass, jquery, cucumber,
   capybara, mocha, factory_girl, rspec, timecop, autotest, evergreen,
   jasmine, will_paginate, friendly_id and hoptoad_notifier.
 
-        prologue new my_app
-        prologue new my_app default
+        rails-maker new my_app
+        rails-maker new my_app default
 
 * Async: A Rails 3 application with the basic setup complete for running
   fully async on the Thin web server. Included gems are thin,
   rack-fiber_pool, mysql2, and rspec.
 
-        prologue new my_app async
+        rails-maker new my_app async
 
 
 ### Quick Start
 
-    gem install prologue
+    gem install rails-maker
 
-    prologue new my_app
+    rails-maker new my_app
 
 
 ### Options ( in default template )
 
-    prologue new my_app --no-auth
+    rails-maker new my_app --no-auth
 
-    prologue new my_app --no-roles
+    rails-maker new my_app --no-roles
 
-    prologue new my_app --no-admin
+    rails-maker new my_app --no-admin
 
 
 ### Testing generated default app
@@ -53,7 +53,7 @@ We hope it saves you a mess of time!
 
 ### Issues
 
-Please report issues to the [Prologue issue tracker](http://github.com/quickleft/prologue/issues/).
+Please report issues to the [the rails-maker issue tracker](http://github.com/koteus/rails-maker/issues/).
 
 
 ### Development
@@ -76,7 +76,7 @@ those outputs with aruba.
 
 ### Thanks
 
-All of the contributors to the many awesome open source projects that make up prologue and allow us to do our job everyday.
+All of the contributors to the many awesome open source projects that make up rails-maker and allow us to do our job everyday.
 Also, thanks go out to the crew at thoughtbot for writing suspenders.  It's what gave us the idea to package up our
 templates into a gem in the first place.
 
