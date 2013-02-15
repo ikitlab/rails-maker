@@ -68,13 +68,13 @@ apply File.expand_path("../lib/test_suite.rb", __FILE__)
 apply File.expand_path("../lib/friendly_id.rb", __FILE__)
 
 # Apply Devise?
-apply File.expand_path("../lib/devise.rb", __FILE__) if ENV['PROLOGUE_AUTH']
+apply File.expand_path("../lib/devise.rb", __FILE__) if ENV['RAILSMAKER_AUTH']
 
 # Apply admin
-apply File.expand_path("../lib/admin.rb", __FILE__) if ENV['PROLOGUE_ADMIN']
+apply File.expand_path("../lib/admin.rb", __FILE__) if ENV['RAILSMAKER_ADMIN']
 
 # Apply cancan
-apply File.expand_path("../lib/cancan.rb", __FILE__) if ENV['PROLOGUE_ROLES']
+apply File.expand_path("../lib/cancan.rb", __FILE__) if ENV['RAILSMAKER_ROLES']
 
 # Apply db create and migrations
 apply File.expand_path("../lib/db.rb", __FILE__)
@@ -100,7 +100,7 @@ apply File.expand_path("../lib/rspec_clean.rb", __FILE__)
 # Make the form errors work like they did in 2.3.8
 apply File.expand_path("../lib/dynamic_form.rb", __FILE__)
 
-login_msg = (ENV['PROLOGUE_ADMIN']) ? "Login to admin with email #{ENV['PROLOGUE_USER_EMAIL']} and password #{ENV['PROLOGUE_USER_PASSWORD']}" : ""
+login_msg = (ENV['RAILSMAKER_ADMIN']) ? "Login to admin with email #{ENV['RAILSMAKER_USER_EMAIL']} and password #{ENV['RAILSMAKER_USER_PASSWORD']}" : ""
 
 say <<-D
 

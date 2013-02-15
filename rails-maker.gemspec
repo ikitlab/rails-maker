@@ -9,21 +9,20 @@ Gem::Specification.new do |s|
   s.email       = ["kalbazov@gmail.com"]
   s.homepage    = "http://github.com/koteus/rails-maker"
   s.summary     = "rails-maker-#{s.version}"
-  s.description = "Generate custom Rails app in minutes"
+  s.description = "Generate a Rails app with application templates"
 
   s.rubyforge_project         = "rails-maker"
   s.required_rubygems_version = "> 1.3.6"
 
   # Runtime Dependencies
-  s.add_dependency "activesupport" , "~> 3.0.7"
-  s.add_dependency "rails"         , "~> 3.0.7"
-  s.add_dependency "thor"          , "~> 0.14.6"
+  s.add_dependency "activesupport"
+  s.add_dependency "thor"
+  s.add_dependency "rails"
 
   # Development Dependencies
-  s.add_development_dependency "aruba"    , "~> 0.2.3"
-  s.add_development_dependency "bundler"  , "~> 1.0.12"
-  s.add_development_dependency "cucumber" , "~> 0.9.3"
-  s.add_development_dependency "rspec"    , "~> 2.0.0"
+  s.add_development_dependency "bundler"
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "thor"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact

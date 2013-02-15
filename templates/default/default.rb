@@ -1,4 +1,4 @@
-require 'active_support/secure_random'
+#require 'active_support/secure_random'
 
 module RailsMaker
 
@@ -28,12 +28,12 @@ module RailsMaker
         end
 
         # Env vars used in our template
-        ENV['PROLOGUE_AUTH']  = "true" if opts[:auth]
-        ENV['PROLOGUE_ADMIN'] = "true" if opts[:admin]
-        ENV['PROLOGUE_ROLES'] = "true" if opts[:roles]
-        ENV['PROLOGUE_USER_NAME'] = git_user_name if opts[:admin]
-        ENV['PROLOGUE_USER_EMAIL'] = git_user_email if opts[:admin]
-        ENV['PROLOGUE_USER_PASSWORD'] = user_password if opts[:admin]
+        ENV['RAILSMAKER_AUTH']  = "true" if opts[:auth]
+        ENV['RAILSMAKER_ADMIN'] = "true" if opts[:admin]
+        ENV['RAILSMAKER_ROLES'] = "true" if opts[:roles]
+        ENV['RAILSMAKER_USER_NAME'] = git_user_name if opts[:admin]
+        ENV['RAILSMAKER_USER_EMAIL'] = git_user_email if opts[:admin]
+        ENV['RAILSMAKER_USER_PASSWORD'] = user_password if opts[:admin]
 
       end
 

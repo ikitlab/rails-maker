@@ -108,7 +108,7 @@ gsub_file devise_migration, /# add_index :users, :confirmation_token,   :unique 
 append_file 'db/seeds.rb' do
 <<-FILE
 # Setup initial user so we can get in
-user = User.create! :name => "#{ENV['PROLOGUE_USER_NAME']}", :email => "#{ENV['PROLOGUE_USER_EMAIL']}", :password => "#{ENV['PROLOGUE_USER_PASSWORD']}", :password_confirmation => "#{ENV['PROLOGUE_USER_PASSWORD']}"
+user = User.create! :name => "#{ENV['RAILSMAKER_USER_NAME']}", :email => "#{ENV['RAILSMAKER_USER_EMAIL']}", :password => "#{ENV['RAILSMAKER_USER_PASSWORD']}", :password_confirmation => "#{ENV['RAILSMAKER_USER_PASSWORD']}"
 user.confirmed_at = user.confirmation_sent_at
 user.save
 FILE

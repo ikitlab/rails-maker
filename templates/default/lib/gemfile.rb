@@ -2,10 +2,10 @@ run 'rm Gemfile'
 create_file 'Gemfile', "source 'http://rubygems.org'\n"
 gem "rails", "~> 3.0.0"
 gem "sqlite3-ruby", :require => "sqlite3"
-if ENV['PROLOGUE_AUTH']
+if ENV['RAILSMAKER_AUTH']
   gem 'devise', "~> 1.1.3"
 end
-if ENV['PROLOGUE_ROLES']
+if ENV['RAILSMAKER_ROLES']
   gem 'cancan'
 end
 gem "hoptoad_notifier"

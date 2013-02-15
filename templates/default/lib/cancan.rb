@@ -79,7 +79,7 @@ inject_into_file 'app/controllers/application_controller.rb', :before => "end\n"
 RUBY
 end
 
-if ENV['PROLOGUE_ADMIN']
+if ENV['RAILSMAKER_ADMIN']
   inject_into_file 'app/views/admin/users/_form.html.haml', :after => "= f.password_field :password_confirmation\n" do 
   <<-'RUBY'
     .form_row
@@ -99,7 +99,7 @@ append_file 'db/seeds.rb' do
 Role.create! :name => 'Admin'
 Role.create! :name => 'Member'
 
-user1 = User.find_by_email('#{ENV['PROLOGUE_USER_EMAIL']}')
+user1 = User.find_by_email('#{ENV['RAILSMAKER_USER_EMAIL']}')
 user1.role_ids = [1,2]
 user1.save
 FILE
