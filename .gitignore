@@ -1,0 +1,7 @@
+pkg/*
+*.gem
+.bundle
+tmp
+.idea
+.DS_Store
+.rvmrc
