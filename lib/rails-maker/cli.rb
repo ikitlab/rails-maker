@@ -1,4 +1,4 @@
-require 'active_support/secure_random'
+
 require 'thor'
 require 'thor/actions'
 
@@ -9,7 +9,7 @@ module RailsMaker
     # Includes
     include Thor::Actions
 
-    desc "new [app]", "Create a new Rails 3 application"
+    desc "new [app]", "Create a new Rails application"
     long_desc <<-D
       The rails-maker will ask you a few questions to determine what features you
       would like to generate. Based on your answers it will setup a new Rails 3 application.

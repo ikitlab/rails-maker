@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.summary     = "rails-maker-#{s.version}"
   s.description = "Generate a Rails app with application templates"
 
-  s.rubyforge_project         = "rails-maker"
-  s.required_rubygems_version = "> 1.3.6"
+  #s.rubyforge_project         = "rails-maker"
+  #s.required_rubygems_version = "> 1.3.6"
 
   # Runtime Dependencies
   s.add_dependency "activesupport"
@@ -24,8 +24,14 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "thor"
 
-  s.files        = `git ls-files`.split("\n")
-  s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
-  s.require_path = "lib"
+  s.has_rdoc = true
+  s.extra_rdoc_files = ["README.md", "LICENSE"]
+
+  #s.files = Dir['lib/**/*']
+  #s.executables = Dir['rails-maker']
+
+  s.bindir      = 'bin'
+  s.executables = []
+
 end
 
