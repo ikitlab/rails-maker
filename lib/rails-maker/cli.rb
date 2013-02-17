@@ -6,21 +6,21 @@ module RailsMaker
 
   class CLI < Thor
 
-    # Includes
     include Thor::Actions
 
     desc "new [app]", "Create a new Rails application"
     long_desc <<-D
       The rails-maker will ask you a few questions to determine what features you
-      would like to generate. Based on your answers it will setup a new Rails 3 application.
+      would like to generate. Based on your answers it will setup a new Rails application.
     D
-    def new( project , template_name = "default" )
+
+    def new(project, template_name = "default")
 
       # Require the template runner
       require "#{RailsMaker::GEM_ROOT}/templates/#{template_name}/#{template_name}.rb"
 
       # Invoke the template runner
-      invoke "rails-maker:templates:#{template_name}:on_invocation"
+      invoke "RailsMaker:templates:#{template_name}:on_invocation"
 
       # Execute the template
       exec(<<-COMMAND)

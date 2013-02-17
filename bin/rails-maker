@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# -*- mode: ruby -*-
+# encoding: UTF-8
 
 # Requires
 begin
@@ -15,15 +15,3 @@ RailsMaker::GEM_ROOT = File.expand_path( File.dirname( __FILE__ ) + '/../' )
 
 # Run
 RailsMaker::CLI.start
-
-
-=begin
-
-require 'rubygems'
-require File.expand_path(File.dirname(__FILE__) + "/../lib/my_fun_apps")
-require "hello_world/cli"
-
-HelloWorld::CLI.execute(STDOUT, ARGV)
-	
-=end
-
