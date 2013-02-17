@@ -1,5 +1,3 @@
-#require 'active_support/secure_random'
-
 module RailsMaker
 
   module Templates
@@ -22,9 +20,9 @@ module RailsMaker
         opts = options.dup
 
         # Can't build an admin or roles without devise
-        if !opts[:auth]
-          opts[:admin] = false;
-          opts[:roles] = false;
+        unless opts[:auth]
+          opts[:admin] = false
+          opts[:roles] = false
         end
 
         # Env vars used in our template
@@ -40,15 +38,15 @@ module RailsMaker
       private
 
       def git_user_name
-        `git config --global user.name`.chomp.gsub('"', '\"') || "Quick Left"
+        `git config --global user.name`.chomp.gsub('"', '\"') || 'admin'
       end
 
       def git_user_email
-        `git config --global user.email`.chomp || "me@me.com"
+        `git config --global user.email`.chomp || 'admin@ikitlab.com'
       end
 
       def user_password
-        ActiveSupport::SecureRandom.base64(8)
+        'admin123'
       end
 
     end

@@ -5,3 +5,9 @@ inject_into_file 'config/application.rb', :after => "# Configure the default enc
     end
 RUBY
 end
+
+initializer('haml.rb') do
+  <<-'FILE'
+Haml::Template.options[:format] = :html5
+  FILE
+end

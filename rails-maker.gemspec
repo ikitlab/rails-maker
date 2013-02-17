@@ -19,6 +19,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activesupport'
   gem.add_dependency 'thor'
   gem.add_dependency 'rails'
+  gem.add_dependency 'hpricot'
+  gem.add_dependency 'ruby_parser'
 
   # Development Dependencies
   gem.add_development_dependency 'bundler'

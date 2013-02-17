@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
-# encoding: UTF-8
-=begin
+
 # Requires
 begin
   require 'rails-maker'
@@ -15,25 +14,3 @@ RailsMaker::GEM_ROOT = File.expand_path( File.dirname( __FILE__ ) + '/../' )
 
 # Run
 RailsMaker::CLI.start(ARGV)
-=end
-
-require 'thor'
-require 'thor/actions'
-
-class MyCLI < Thor
-
-	#include Thor::Actions
-
-  desc "hello NAME", "say hello to NAME"
-  def hello(name)
-    puts "Hello #{name}"
-
-    invoke 'bar'
-  end
-
-  def bar
-  	puts 'foo'
-  end
-end
-
-MyCLI.start

@@ -31,91 +31,43 @@ public/system/**/**/**/*
 .idea/*
 .sass-cache/**/*
 *.swp
+public/uploads
 FILE
 end
 
-# Apply Gemfile
-apply File.expand_path("../lib/gemfile.rb", __FILE__)
+files = %w{
+  gemfile
+  haml_generator
+  rails_clean
+  application_layout
+  home_controller
+  css
+  test_suite
+  authentication
+  authorization
+  admin
+  db
+  db_seed
+}
 
-# Apply Jammit
-apply File.expand_path("../lib/jammit.rb", __FILE__)
-
-# Apply HAML generator
-apply File.expand_path("../lib/haml_generator.rb", __FILE__)
-
-# Apply rails clean up
-apply File.expand_path("../lib/rails_clean.rb", __FILE__)
-
-# Apply js
-apply File.expand_path("../lib/js.rb", __FILE__)
-
-# Apply css
-apply File.expand_path("../lib/css.rb", __FILE__)
-
-# Apply evergreen and jasmin
-apply File.expand_path("../lib/evergreen.rb", __FILE__)
-
-# Apply HTML5 Layout
-apply File.expand_path("../lib/application_layout.rb", __FILE__)
-
-# Apply SASS
-apply File.expand_path("../lib/sass.rb", __FILE__)
-
-# Apply Test Suite
-apply File.expand_path("../lib/test_suite.rb", __FILE__)
-
-# Apply Friendly Id
-apply File.expand_path("../lib/friendly_id.rb", __FILE__)
-
-# Apply Devise?
-apply File.expand_path("../lib/devise.rb", __FILE__) if ENV['RAILSMAKER_AUTH']
-
-# Apply admin
-apply File.expand_path("../lib/admin.rb", __FILE__) if ENV['RAILSMAKER_ADMIN']
-
-# Apply cancan
-apply File.expand_path("../lib/cancan.rb", __FILE__) if ENV['RAILSMAKER_ROLES']
-
-# Apply db create and migrations
-apply File.expand_path("../lib/db.rb", __FILE__)
-
-# Apply db seeds
-apply File.expand_path("../lib/db_seed.rb", __FILE__)
-
-# Make a home controller
-apply File.expand_path("../lib/home_controller.rb", __FILE__)
-
-# Make initializers
-apply File.expand_path("../lib/initializers.rb", __FILE__)
-
-# Clean up generated routes
-apply File.expand_path("../lib/clean_routes.rb", __FILE__)
-
-# Setup yard
-apply File.expand_path("../lib/yard.rb", __FILE__)
-
-# Remove RSpec stuff we are not gonna use right away
-apply File.expand_path("../lib/rspec_clean.rb", __FILE__)
-
-# Make the form errors work like they did in 2.3.8
-apply File.expand_path("../lib/dynamic_form.rb", __FILE__)
+files.each do |file|
+  apply File.expand_path("../lib/#{file}.rb", __FILE__)
+end
 
 login_msg = (ENV['RAILSMAKER_ADMIN']) ? "Login to admin with email #{ENV['RAILSMAKER_USER_EMAIL']} and password #{ENV['RAILSMAKER_USER_PASSWORD']}" : ""
 
 say <<-D
 
 
-
-
   ########################################################################
 
   The rails-maker just added like 6 hours to your life.
 
-  Template Installed :: Quick Left Rails 3 the rails-maker Default
+  Template Installed :: Default
 
   Next run...
+
   rake spec
-  rake cucumber
   rails s
 
   #{login_msg}

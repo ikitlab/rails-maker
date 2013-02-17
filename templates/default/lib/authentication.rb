@@ -1,18 +1,24 @@
+require 'hpricot'
+require 'ruby_parser'
+
 say "Building authentication"
+
+# Configure sensitive parameters which will be filtered from the log file.
 gsub_file 'config/application.rb', /:password/, ':password, :password_confirmation'
 
 run 'rails generate devise:install'
-run 'rails generate devise:views'
+# Generate devise views
+run 'rails generate devise:views -e erb'
+# Convert devise views to haml
+run "for i in `find app/views/devise -name '*.erb'` ; do html2haml -e $i ${i%erb}haml ; rm $i ; done"
 
 gsub_file 'config/environments/development.rb', /# Don't care if the mailer can't send/, '### ActionMailer Config'
 
 gsub_file 'config/environments/development.rb', /config.action_mailer.raise_delivery_errors = false/ do
 <<-RUBY
   config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
-  # A dummy setup for development - no deliveries, but logged
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = false
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
 RUBY
 end
@@ -101,9 +107,53 @@ end
 
 devise_migration = Dir['db/migrate/*_devise_create_users.rb'].first
 
-gsub_file devise_migration, /# t.confirmable/, 't.confirmable'
-gsub_file devise_migration, /# t.token_authenticatable/, 't.token_authenticatable'
-gsub_file devise_migration, /# add_index :users, :confirmation_token,   :unique => true/, 'add_index :users, :confirmation_token,   :unique => true'
+gsub_file devise_migration, /./, <<-FILE
+class DeviseCreateUsers < ActiveRecord::Migration
+  def change
+    create_table(:users) do |t|
+      ## Database authenticatable
+      t.string :email,              :null => false, :default => ""
+      t.string :encrypted_password, :null => false, :default => ""
+
+      ## Recoverable
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
+
+      ## Rememberable
+      t.datetime :remember_created_at
+
+      ## Trackable
+      t.integer  :sign_in_count, :default => 0
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
+
+      ## Confirmable
+      t.string   :confirmation_token
+      t.datetime :confirmed_at
+      t.datetime :confirmation_sent_at
+      t.string   :unconfirmed_email
+
+      ## Lockable
+      t.integer  :failed_attempts, :default => 0 # Only if lock strategy is :failed_attempts
+      t.string   :unlock_token # Only if unlock strategy is :email or :both
+      t.datetime :locked_at
+
+      ## Token authenticatable
+      t.string :authentication_token
+
+      t.timestamps
+    end
+
+    add_index :users, :email,                :unique => true
+    add_index :users, :reset_password_token, :unique => true
+    add_index :users, :confirmation_token,   :unique => true
+    add_index :users, :unlock_token,         :unique => true
+    add_index :users, :authentication_token, :unique => true
+  end
+end
+FILE
 
 append_file 'db/seeds.rb' do
 <<-FILE
@@ -113,6 +163,3 @@ user.confirmed_at = user.confirmation_sent_at
 user.save
 FILE
 end
-
-# make cukes and websteps for devise
-apply File.expand_path("../devise/cucumber.rb", __FILE__)

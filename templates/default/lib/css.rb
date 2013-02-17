@@ -1,11 +1,5 @@
-create_file 'public/stylesheets/reset.css' do
+create_file 'app/assets/stylesheets/reset.css' do
 <<-FILE
-/*
-  html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
-  v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
-  html5doctor.com/html-5-reset-stylesheet/
-*/
-
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code,

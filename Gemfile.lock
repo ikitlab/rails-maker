@@ -3,7 +3,9 @@ PATH
   specs:
     rails-maker (0.1.1)
       activesupport
+      hpricot
       rails
+      ruby_parser
       thor
 
 GEM
@@ -41,6 +43,7 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.7.0)
     hike (1.2.1)
+    hpricot (0.8.6)
     i18n (0.6.1)
     journey (1.0.4)
     json (1.7.7)
@@ -86,6 +89,9 @@ GEM
     rspec-mocks (2.0.1)
       rspec-core (~> 2.0.1)
       rspec-expectations (~> 2.0.1)
+    ruby_parser (3.1.1)
+      sexp_processor (~> 4.1)
+    sexp_processor (4.1.5)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
