@@ -1,5 +1,5 @@
 $:.unshift File.expand_path("../lib", __FILE__)
-require "rails-maker/version"
+require 'rails-maker/version'
 
 Gem::Specification.new do |gem|
   gem.name    = 'rails-maker'
@@ -16,12 +16,12 @@ Gem::Specification.new do |gem|
   gem.files = %x{ git ls-files }.split("\n").select { |d| d =~ %r{^(LICENSE|README|bin/|templates/|lib/|spec/)} }
 
   # Runtime Dependencies
-  gem.add_dependency "activesupport"
-  gem.add_dependency "thor"
-  gem.add_dependency "rails"
+  gem.add_dependency 'activesupport'
+  gem.add_dependency 'thor'
+  gem.add_dependency 'rails'
 
   # Development Dependencies
-  gem.add_development_dependency "bundler"
-  gem.add_development_dependency "rspec"
-  gem.add_development_dependency "thor"
+  gem.add_development_dependency 'bundler'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'thor'
 end

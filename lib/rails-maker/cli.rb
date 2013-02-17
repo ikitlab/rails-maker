@@ -1,7 +1,4 @@
 
-require 'thor'
-require 'thor/actions'
-
 module RailsMaker
 
   class CLI < Thor
@@ -16,19 +13,22 @@ module RailsMaker
 
     def new(project, template_name = "default")
 
+      say "The rails-maker project #{project}, template #{template_name}"
+
       # Require the template runner
-      require "#{RailsMaker::GEM_ROOT}/templates/#{template_name}/#{template_name}.rb"
+      #require "#{RailsMaker::GEM_ROOT}/templates/#{template_name}/#{template_name}.rb"
 
       # Invoke the template runner
-      invoke "RailsMaker:templates:#{template_name}:on_invocation"
+      # invoke "railsmaker:templates:#{template_name}:on_invocation"
+      # invoke RailsMaker::Templates::Default.on_invocation  
 
       # Execute the template
-      exec(<<-COMMAND)
-        rails new #{project} \
-          --template=#{RailsMaker::GEM_ROOT}/templates/#{template_name}/bootstrap.rb \
-          --skip-test-unit \
-          --skip-prototype
-      COMMAND
+      #exec(<<-COMMAND)
+      #  rails new #{project} \
+      #    --template=#{RailsMaker::GEM_ROOT}/templates/#{template_name}/bootstrap.rb \
+      #    --skip-test-unit \
+      #    --skip-prototype
+      #COMMAND
 
     end
 

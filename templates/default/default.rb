@@ -9,14 +9,14 @@ module RailsMaker
       # Class Options
       # @see https://github.com/wycats/thor/wiki/Groups
       class_option :auth  , :type => :boolean , :default => true , :banner => "Sets up devise for authentication."
-      class_option :roles , :type => :boolean , :default => true , :banner => "Sets up cancan for authorization with roles."
+      class_option :roles , :type => :boolean , :default => true , :banner => "Sets up cancan for authorization with rolify."
       class_option :admin , :type => :boolean , :default => true , :banner => "Sets up very basic admin"
 
       # Descriptions
-      desc "Runs the default rails-maker Rails 3 stack task"
+      desc "Runs the default rails-maker Rails stack task"
 
       # The method to run when the template is invoked
-      def on_invocation
+      def on_invocation  
 
         # Dup our options so we can modify them
         opts = options.dup
