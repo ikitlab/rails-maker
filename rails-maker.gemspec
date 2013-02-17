@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.executables = 'rails-maker'
   gem.license     = 'MIT'
   
-  gem.files = %x{ git ls-files }.split("\n").select { |d| d =~ %r{^(License|README|bin/|data/|ext/|lib/|spec/|test/)} }
+  gem.files = %x{ git ls-files }.split("\n").select { |d| d =~ %r{^(LICENSE|README|bin/|templates/|lib/|spec/)} }
 
   # Runtime Dependencies
   gem.add_dependency "activesupport"
