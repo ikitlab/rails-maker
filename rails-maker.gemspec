@@ -1,18 +1,19 @@
-# -*- encoding: utf-8 -*-
-require File.expand_path("../lib/rails-maker/version", __FILE__)
+$:.unshift File.expand_path("../lib", __FILE__)
+require "rails-maker/version"
 
-Gem::Specification.new do |s|
-  s.name        = "rails-maker"
-  s.version     = RailsMaker::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Konstantin Kalbazov"]
-  s.email       = ["kalbazov@gmail.com"]
-  s.homepage    = "http://github.com/koteus/rails-maker"
-  s.summary     = "rails-maker-#{s.version}"
-  s.description = "Generate a Rails app with application templates"
+Gem::Specification.new do |gem|
+  gem.name    = 'rails-maker'
+  gem.version = RailsMaker::VERSION
 
-  #s.rubyforge_project         = "rails-maker"
-  #s.required_rubygems_version = "> 1.3.6"
+  gem.author      = 'Konstantin Kalbazov'
+  gem.email       = 'kalbazov@gmail.com'
+  gem.homepage    = 'http://github.com/koteus/rails-maker'
+  gem.summary     = "rails-maker-#{s.version}"
+  gem.description = 'Generate a Rails app with application templates'
+  gem.executables = 'rails-maker'
+  gem.license     = 'MIT'
+  
+  gem.files = %x{ git ls-files }.split("\n").select { |d| d =~ %r{^(License|README|bin/|data/|ext/|lib/|spec/|test/)} }
 
   # Runtime Dependencies
   s.add_dependency "activesupport"
@@ -23,15 +24,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler"
   s.add_development_dependency "rspec"
   s.add_development_dependency "thor"
-
-  s.has_rdoc = true
-  s.extra_rdoc_files = ["README.md", "LICENSE"]
-
-  #s.files = Dir['lib/**/*']
-  #s.executables = Dir['rails-maker']
-
-  s.bindir      = 'bin'
-  s.executables = []
-
 end
-
