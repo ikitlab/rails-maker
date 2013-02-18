@@ -3,6 +3,8 @@ create_file 'Gemfile' do
 <<-RUBY
 source 'http://rubygems.org'
 
+gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '3-2-stable'
+
 gem "sqlite3"
 
 gem "haml-rails"
@@ -48,8 +50,8 @@ gem "simple_form"
 group :assets do
   gem "sass-rails"
   gem "compass-rails"
-  gem "turbo-sprockets-rails3", "~> 0.3.6"
-  gem "bootstrap-sass", "~> 2.2.1.1"
+  gem "bootstrap-sass"
+  gem "turbo-sprockets-rails3"
 end
 
 group :development do
