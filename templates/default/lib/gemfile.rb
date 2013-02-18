@@ -3,30 +3,33 @@ create_file 'Gemfile' do
 <<-RUBY
 source 'http://rubygems.org'
 
-gem "rails", "3.2.11"
-gem "pg"
+gem "sqlite3"
 
-# for sphinx search we also need mysql2
-gem "thinking-sphinx"
-gem "mysql2"
-
+gem "haml-rails"
 gem "jquery-rails"
+gem "coffee-script"
+
 gem "unicorn"
 gem "thor"
 gem "settingslogic"
-gem "coffee-script"
-gem "haml-rails"
+
 gem "state_machine"
 gem "yajl-ruby"
 # gem "newrelic_rpm"
 gem "awesome_print"
+
 gem "uglifier"
 gem "execjs"
 gem "therubyracer"
+
 gem "devise"
 gem "omniauth-facebook", "1.4.0"
 gem "omniauth-vkontakte"
 gem "omniauth-odnoklassniki"
+
+gem "rolify"
+#gem "cancan"
+
 gem "kaminari"
 gem "carrierwave"
 gem "rmagick"
@@ -37,7 +40,7 @@ gem "faraday_middleware"
 gem "patron"
 gem "certified"
 gem "unicode"
-gem "rolify"
+
 gem "psych"
 gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
 gem "simple_form"
@@ -62,7 +65,7 @@ group :development do
   gem "faker"
 end
 
-group :test, :development do
+group :development, :test do
   gem "rspec-rails"
   gem "factory_girl_rails"
 end
