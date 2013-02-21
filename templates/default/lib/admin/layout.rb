@@ -1,12 +1,3 @@
-=begin
-remove_file 'app/views/admin/dashboard/index.html.haml'
-create_file 'app/views/admin/dashboard/index.html.haml' do
-<<-FILE
-%h1 #{app_name.humanize} Admin
-FILE
-end
-=end
-
 run 'mkdir app/views/admin/shared'
 
 create_file 'app/views/admin/shared/_header.html.haml' do
@@ -26,18 +17,25 @@ create_file 'app/views/admin/shared/_header.html.haml' do
 end
 
 create_file 'app/views/admin/shared/_flash_messages.html.haml' do
-<<-FILE
+<<-HAML
 - flash.each do |key, value|
   .alert{ class: "alert-" + key.to_s }
     %button{ type: "button", class: "close", "data-dismiss" => "alert"}
       &times;
     = value
-  FILE
+  HAML
 end
 
 create_file 'app/views/admin/shared/_footer.html.haml' do
-  <<-FILE
-  FILE
+  <<-HAML
+  HAML
+end
+
+create_file 'app/views/shared/_navigation_menu.html.haml' do
+<<-HAML
+%ul.nav
+  = nav_link "Dashboard", admin_root_path
+HAML
 end
 
 run 'rm app/views/layouts/admin.html.erb'
@@ -47,22 +45,21 @@ create_file 'app/views/layouts/admin.html.haml' do
 %html{ lang: I18n.locale }
   %head
     %meta{ charset: 'utf-8'}
-    %title #{app_name.humanize}
+    %title #{app_name.humanize} - AdminPanel
     %link{ rel: "shortcut icon", href: "/favicon.ico" }
     = csrf_meta_tag
-    = stylesheet_link_tag "application"
+    = stylesheet_link_tag "admin"
 
   %body{ "data-locale" => I18n.locale }
 
-    =render partial: 'shared/header'
+    =render partial: 'admin/shared/header'
 
     .container
-      =render partial: 'shared/flash_messages'
+      =render partial: 'admin/shared/flash_messages'
 
       = yield
 
-    = javascript_include_tag "application"
-    = render partial: 'shared/analytics' if Rails.env.production?
+    = javascript_include_tag "admin"
 
     //= debug params if Rails.env.development?
 HAML

@@ -1,7 +1,16 @@
 run 'rm config/routes.rb'
 
-create_file 'config/routes.rb' do
+admin = ''
 
+if options[:admin]
+  admin = <<-RUBY
+    namespace :admin do
+      root to: 'home#index'
+    end
+  RUBY
+end
+
+create_file 'config/routes.rb' do
 <<-RUBY
 #{app_name.classify}::Application.routes.draw do
 
@@ -18,12 +27,7 @@ create_file 'config/routes.rb' do
       sign_out: 'logout'
     }
 
-  namespace :admin do
-    root to: 'home#index'
-  end
-
+    #{admin}
 end
-
 RUBY
-
 end

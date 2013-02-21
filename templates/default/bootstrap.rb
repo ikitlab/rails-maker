@@ -3,7 +3,11 @@ require "net/https"
 require "uri"
 require 'rbconfig'
 
-say "Building Application with the rails-maker..."
+say 'Building Application with the rails-maker...'
+
+options = {}
+options[:admin] = ask('Include admin? [Yn]').downcase == 'y'
+
 
 def get_remote_https_file(source, destination)
   uri = URI.parse(source)
