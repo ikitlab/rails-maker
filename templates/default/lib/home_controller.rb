@@ -7,4 +7,4 @@ create_file 'app/views/home/index.html.haml' do
 FILE
 end
 =end
-route "root :to => 'home#index'"
+#route "root :to => 'home#index'"

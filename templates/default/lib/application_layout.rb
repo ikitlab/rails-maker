@@ -1,38 +1,39 @@
 run 'mkdir app/views/shared'
 
 create_file 'app/views/shared/_header.html.haml' do
-<<-FILE
-%header#main_header
-  %h1= link_to '#{app_name.humanize}', root_path
-= render 'shared/messages'
-%nav#main_nav
-  %ul
-    %li= link_to 'Home', root_path
-FILE
+<<-HAML
+
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{ "data-target" => ".nav-collapse", "data-toggle" => "collapse" }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{ href: root_path } #{app_name.humanize}
+      .nav-collapse
+        =render partial: 'shared/top_navigation'
+HAML
 end
 
-create_file 'app/views/shared/_messages.html.haml' do
+create_file 'app/views/shared/_flash_messages.html.haml' do
 <<-FILE
-- if flash[:notice]
-  %div#messenger{:class => "flasher"}= flash[:notice]
-- if flash[:error]
-  %div#error{:class => "flasher"}= flash[:error]
-- if flash[:alert]
-  %div#alert{:class => "flasher"}= flash[:alert]
+- flash.each do |key, value|
+  .alert{ class: "alert-" + key.to_s }
+    %button{ type: "button", class: "close", "data-dismiss" => "alert"}
+      &times;
+    = value
 FILE
 end
 
 create_file 'app/views/shared/_footer.html.haml' do
 <<-FILE
-%footer#main_footer
+
 FILE
 end
 
 create_file 'app/views/shared/_end_scripts.html.haml' do
 <<-FILE
-= include_javascripts :common
-= yield(:end_scripts)
-- if Rails.env == 'production'
   :javascript
     var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
     (function(d, t) {
@@ -47,72 +48,28 @@ end
 
 run 'rm app/views/layouts/application.html.erb'
 create_file 'app/views/layouts/application.html.haml' do
-<<-FILE
+<<-HAML
 !!! 5
--# paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-%html.no-js{ :lang => "en" }
-  <!--<![endif]-->
+%html{ lang: I18n.locale }
   %head
-    %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
-    %meta{'http-equiv' => 'X-UA-Compatible', :content => 'IE=edge,chrome=1'}
-    %title<
-      #{app_name.humanize}
-      = yield(:title)
-    %meta{:name => 'description', :content => ''}
-    %meta{:name => 'author', :content => ''}
-    %meta{:name => 'viewport', :content => 'width=device-width initial-scale=1.0 maximum-scale=1.0'}
-    %meta{:name => 'apple-mobile-web-app-capable', :content => 'yes'}
+    %meta{ charset: 'utf-8'}
+    %title #{app_name.humanize}
+    %link{ rel: "shortcut icon", href: "/favicon.ico" }
     = csrf_meta_tag
-    %link{:rel => "shortcut icon", :href => "/favicon.ico", :type => "image/x-icon"}
-    %link{:rel => "apple-touch-icon", :href => "/images/ati.png"}
-    /[if lt IE 9]
-      %script{:type => "text/javascript", :src  => "/javascripts/shiv.js"}
-    = include_stylesheets :main, :media => 'all'
-    = yield(:head)
-  %body
-    #container
-      = render :partial => "shared/header"
-      %section#content
-        = yield
-    = render :partial => "shared/footer"
-    = render :partial => "shared/end_scripts"
-FILE
-end
+    = stylesheet_link_tag "application"
 
-create_file 'public/maintenance.html' do
-<<-FILE
-<!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html class='no-js' lang='en'>
-  <!--<![endif]-->
-  <head>
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
-    <title>#{app_name.humanize} is down for maintenance</title>
-    <meta content='width=device-width initial-scale=1.0 maximum-scale=1.0' name='viewport'>
-    <link href='/favicon.ico' rel='shortcut icon' type='image/x-icon'>
-    <!--[if lt IE 9]>
-      <script src='/javascripts/shiv.js' type='text/javascript'></script>
-    <![endif]-->
-    <link href="/stylesheets/reset.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="/stylesheets/main.css" media="all" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-    <div id='container'>
-      <section id='content'>
-        <h1>#{app_name.humanize} is down for maintenance</h1>
-      </section>
-    </div>
-  </body>
-</html>
-FILE
+  %body{ "data-locale" => I18n.locale }
+
+    =render partial: 'shared/header'
+
+    .container
+      =render partial: 'shared/flash_messages'
+
+      = yield
+
+    = javascript_include_tag "application"
+    = render partial: 'shared/analytics' if Rails.env.production?
+
+    //= debug params if Rails.env.development?
+HAML
 end

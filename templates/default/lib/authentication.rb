@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :name, :email
   validates_presence_of     :password, :on => :create
   validates_confirmation_of :password, :on => :create
-  validates_length_of       :password, :within => 6..30, :allow_blank => true
+  validates_length_of       :password, :within => 6..30, :allow_blank => false
   validates_uniqueness_of   :email, :case_sensitive => false, :scope => :deleted_at
   validates_format_of       :email, :with => Devise::email_regexp
 
@@ -80,7 +80,7 @@ end
 generate(:migration, "AddNameToUsers name:string")
 generate(:migration, "AddCachedSlugToUsers cached_slug:string")
 generate(:migration, "AddDeletedAtToUsers deleted_at:datetime")
-
+=begin
 create_file 'app/views/devise/menu/_login_items.html.haml' do
 <<-'FILE'
 - if user_signed_in?
@@ -104,7 +104,7 @@ append_file 'app/views/shared/_header.html.haml' do
     = render 'devise/menu/login_items'
 FILE
 end
-
+=end
 devise_migration = Dir['db/migrate/*_devise_create_users.rb'].first
 
 gsub_file devise_migration, /./, <<-FILE

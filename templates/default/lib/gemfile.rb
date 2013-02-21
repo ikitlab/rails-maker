@@ -64,7 +64,7 @@ group :development do
   gem "rvm-capistrano"
   gem "letter_opener"
   gem "annotate"
-  gem "faker"
+  gem "ffaker"
 end
 
 group :development, :test do

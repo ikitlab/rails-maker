@@ -16,26 +16,8 @@ def get_remote_https_file(source, destination)
   File.open(path, "w") { |file| file.write(response.body) }
 end
 
-git :init
-
-run 'rm .gitignore'
-create_file '.gitignore' do
-<<-FILE
-.bundle
-.DS_Store
-log/*.log
-tmp/**/*
-config/database.yml
-db/*.sqlite3
-public/system/**/**/**/*
-.idea/*
-.sass-cache/**/*
-*.swp
-public/uploads
-FILE
-end
-
 files = %w{
+  git
   gemfile
   haml_generator
   rails_clean
@@ -43,18 +25,19 @@ files = %w{
   home_controller
   css
   test_suite
-  authentication
-  authorization
   admin
   db
-  db_seed
+  routes
 }
+#authentication
+#authorization
+# db_seed
 
 files.each do |file|
   apply File.expand_path("../lib/#{file}.rb", __FILE__)
 end
 
-login_msg = (ENV['RAILSMAKER_ADMIN']) ? "Login to admin with email #{ENV['RAILSMAKER_USER_EMAIL']} and password #{ENV['RAILSMAKER_USER_PASSWORD']}" : ""
+login_msg = (ENV['RAILSMAKER_ADMIN']) ? "Login to admin with email #{ENV['RAILSMAKER_USER_EMAIL']} and password #{ENV['RAILSMAKER_USER_PASSWORD']}" : ''
 
 say <<-D
 
