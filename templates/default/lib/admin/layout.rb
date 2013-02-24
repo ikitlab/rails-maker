@@ -31,7 +31,7 @@ create_file 'app/views/admin/shared/_footer.html.haml' do
   HAML
 end
 
-create_file 'app/views/shared/_navigation_menu.html.haml' do
+create_file 'app/views/admin/shared/_navigation_menu.html.haml' do
 <<-HAML
 %ul.nav
   = nav_link "Dashboard", admin_root_path

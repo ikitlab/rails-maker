@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-maker (0.1.4)
+    rails-maker (0.1.5)
       activesupport
       hpricot
       rails

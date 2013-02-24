@@ -1,12 +1,27 @@
 run 'rm config/routes.rb'
 
-admin = ''
+route_components = {}
 
 if options[:admin]
-  admin = <<-RUBY
+  route_components[:admin] = <<-RUBY
     namespace :admin do
       root to: 'home#index'
     end
+  RUBY
+end
+
+if options[:authentication]
+  route_components[:devise] = <<-RUBY
+    devise_for :users, path: "auth",
+      controllers: {
+        omniauth_callbacks: 'users/omniauth_callbacks',
+        registrations: 'users/registrations'
+      },
+      path_names: {
+        sign_up: 'register',
+        sign_in: 'login',
+        sign_out: 'logout'
+      }
   RUBY
 end
 
@@ -16,18 +31,9 @@ create_file 'config/routes.rb' do
 
   root to: 'home#index'
 
-  devise_for :users, path: "auth",
-    controllers: {
-      omniauth_callbacks: 'users/omniauth_callbacks',
-      registrations: 'users/registrations'
-    },
-    path_names: {
-      sign_up: 'register',
-      sign_in: 'login',
-      sign_out: 'logout'
-    }
+  #{route_components[:devise]}
 
-    #{admin}
+  #{route_components[:admin]}
 end
 RUBY
 end

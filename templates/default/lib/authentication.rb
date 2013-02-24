@@ -43,123 +43,38 @@ RUBY
 end
 
 run 'rails generate devise User'
-run 'rm app/models/user.rb'
 
-create_file 'app/models/user.rb' do
+apply File.expand_path("../authentication/user_model.rb", __FILE__)
+apply File.expand_path("../authentication/user_auth_model.rb", __FILE__)
+#apply File.expand_path("../authentication/migrations.rb", __FILE__)
+
+generate(:migration, "AddNameToUsers name:string")
+generate(:migration, "AddDeletedAtToUsers deleted_at:datetime")
+
+
+
+if options[:omniauth]
+  apply File.expand_path("../authentication/omniauth.rb", __FILE__)
+end
+
+apply File.expand_path("../authentication/header_login_items.rb", __FILE__)
+
+run 'rm app/controllers/application_controller.rb'
+create_file 'app/controllers/application_controller.rb' do
 <<-RUBY
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :token_authenticatable, :recoverable, :rememberable, :trackable, :confirmable
-  default_scope :conditions => { :deleted_at => nil }
-  validates_presence_of     :name, :email
-  validates_presence_of     :password, :on => :create
-  validates_confirmation_of :password, :on => :create
-  validates_length_of       :password, :within => 6..30, :allow_blank => false
-  validates_uniqueness_of   :email, :case_sensitive => false, :scope => :deleted_at
-  validates_format_of       :email, :with => Devise::email_regexp
-
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
-
-  def destroy
-    self.update_attribute(:deleted_at, Time.now.utc)
-  end
-
-  def self.find_with_destroyed *args
-    self.with_exclusive_scope { find(*args) }
-  end
-
-  def self.find_only_destroyed
-    self.with_exclusive_scope :find => { :conditions => "deleted_at IS NOT NULL" } do
-      all
-    end
-  end
-
+class ApplicationController < ActionController::Base
+  protect_from_forgery
+  before_filter :authenticate_user!
 end
 RUBY
 end
 
-generate(:migration, "AddNameToUsers name:string")
-generate(:migration, "AddCachedSlugToUsers cached_slug:string")
-generate(:migration, "AddDeletedAtToUsers deleted_at:datetime")
-=begin
-create_file 'app/views/devise/menu/_login_items.html.haml' do
-<<-'FILE'
-- if user_signed_in?
-  %li
-    = link_to('Logout', destroy_user_session_path)
-- else
-  %li
-    = link_to('Login', new_user_session_path)
-%li
-  User:
-  - if current_user
-    = current_user.name
-  - else
-    (not logged in)
-FILE
-end
-
-append_file 'app/views/shared/_header.html.haml' do
-<<-'FILE'
-  %ul#user_nav
-    = render 'devise/menu/login_items'
-FILE
-end
-=end
-devise_migration = Dir['db/migrate/*_devise_create_users.rb'].first
-
-gsub_file devise_migration, /./, <<-FILE
-class DeviseCreateUsers < ActiveRecord::Migration
-  def change
-    create_table(:users) do |t|
-      ## Database authenticatable
-      t.string :email,              :null => false, :default => ""
-      t.string :encrypted_password, :null => false, :default => ""
-
-      ## Recoverable
-      t.string   :reset_password_token
-      t.datetime :reset_password_sent_at
-
-      ## Rememberable
-      t.datetime :remember_created_at
-
-      ## Trackable
-      t.integer  :sign_in_count, :default => 0
-      t.datetime :current_sign_in_at
-      t.datetime :last_sign_in_at
-      t.string   :current_sign_in_ip
-      t.string   :last_sign_in_ip
-
-      ## Confirmable
-      t.string   :confirmation_token
-      t.datetime :confirmed_at
-      t.datetime :confirmation_sent_at
-      t.string   :unconfirmed_email
-
-      ## Lockable
-      t.integer  :failed_attempts, :default => 0 # Only if lock strategy is :failed_attempts
-      t.string   :unlock_token # Only if unlock strategy is :email or :both
-      t.datetime :locked_at
-
-      ## Token authenticatable
-      t.string :authentication_token
-
-      t.timestamps
-    end
-
-    add_index :users, :email,                :unique => true
-    add_index :users, :reset_password_token, :unique => true
-    add_index :users, :confirmation_token,   :unique => true
-    add_index :users, :unlock_token,         :unique => true
-    add_index :users, :authentication_token, :unique => true
-  end
-end
-FILE
-
 append_file 'db/seeds.rb' do
 <<-FILE
 # Setup initial user so we can get in
-user = User.create! :name => "#{ENV['RAILSMAKER_USER_NAME']}", :email => "#{ENV['RAILSMAKER_USER_EMAIL']}", :password => "#{ENV['RAILSMAKER_USER_PASSWORD']}", :password_confirmation => "#{ENV['RAILSMAKER_USER_PASSWORD']}"
+user = User.create! :name => "admin", :email => "admin@local.host", :password => "admin123", :password_confirmation => "admin123"
 user.confirmed_at = user.confirmation_sent_at
+
 user.save
 FILE
 end

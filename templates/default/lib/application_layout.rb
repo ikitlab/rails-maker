@@ -10,7 +10,7 @@ create_file 'app/views/shared/_header.html.haml' do
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.brand{ href: root_path } #{app_name.humanize}
+      %a#logo.brand{ href: root_path } #{app_name.humanize}
       .nav-collapse
         =render partial: 'shared/navigation_menu'
 HAML

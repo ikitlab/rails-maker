@@ -1,34 +1,23 @@
-say "Building roles"
-generate(:model, "role name:string")
-generate(:migration, "UsersHaveAndBelongToManyRoles")
-habtm_roles = Dir['db/migrate/*_users_have_and_belong_to_many_roles.rb'].first
-inject_into_file habtm_roles, :after => "def self.up\n" do
+say 'Building roles..'
+
+run 'rails g rolify:role Role User'
+
+inject_into_file 'app/models/user.rb', :after => "include User::Auth\n" do
 <<-RUBY
-    create_table :roles_users, :id => false do |t|
-      t.references :role, :user
-    end
+  rolify
 RUBY
 end
 
-inject_into_file habtm_roles, :after => "def self.down\n" do
+run 'rm app/models/role.rb'
+create_file 'app/models/role.rb' do
 <<-RUBY
-    drop_table :roles_users
-RUBY
+  class Role < ActiveRecord::Base
+
+  has_and_belongs_to_many :users, :join_table => :users_roles
+  belongs_to :resource, :polymorphic => true
+
+  scopify
 end
-
-inject_into_file 'app/models/user.rb', :after => "class User < ActiveRecord::Base\n" do
-<<-RUBY
-  has_and_belongs_to_many :roles
-RUBY
-end
-
-inject_into_file 'app/models/role.rb', :after => "class Role < ActiveRecord::Base\n" do
-<<-RUBY
-  has_and_belongs_to_many :users
-
-  def self.sanitize role
-    role.to_s.humanize.split(' ').each{ |word| word.capitalize! }.join(' ')
-  end
 RUBY
 end
 
@@ -59,16 +48,6 @@ end
 RUBY
 end
 
-inject_into_file 'app/models/user.rb', :before => "def destroy\n" do
-<<-RUBY
-
-  def role?(role)
-    return !!self.roles.find_by_name( Role.sanitize role )
-  end
-
-RUBY
-end
-
 inject_into_file 'app/controllers/application_controller.rb', :before => "end\n" do
 <<-RUBY
 
@@ -79,21 +58,13 @@ inject_into_file 'app/controllers/application_controller.rb', :before => "end\n"
 RUBY
 end
 
-if ENV['RAILSMAKER_ADMIN']
-  inject_into_file 'app/views/admin/users/_form.html.haml', :after => "= f.password_field :password_confirmation\n" do 
-  <<-'RUBY'
-    .form_row
-      - Role.find(:all, :order => "name").each do |role|
-        .check_box_item
-          = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role), :id => "user_role_#{role.id}"
-          %label{:for => "user_role_#{role.id}"}= role.name.humanize
-      = hidden_field_tag "user[role_ids][]", ""
-  RUBY
-  end
+inject_into_file 'db/seeds.rb', :before => "user.save" do
+<<-RUBY
+  user.add_role, :admin
 
-  gsub_file 'app/controllers/admin/users_controller.rb', /# attr_accessor logic here/, '@user.accessible = [:role_ids] if current_user.role? :admin'
+RUBY
 end
-
+=begin
 append_file 'db/seeds.rb' do
 <<-FILE
 Role.create! :name => 'Admin'
@@ -104,9 +75,4 @@ user1.role_ids = [1,2]
 user1.save
 FILE
 end
-
-
-
-
-
-
+=end
