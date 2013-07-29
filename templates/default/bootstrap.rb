@@ -33,7 +33,6 @@ end
 files = []
 files << 'git'
 files << 'gemfile'
-files << 'haml_generator'
 files << 'rails_clean'
 files << 'application_layout'
 files << 'home_controller'

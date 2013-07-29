@@ -54,7 +54,7 @@ gem 'unicode'
 ## Frontend stuff
 gem 'haml-rails'
 gem 'jquery-rails'
-gem 'coffee-script'
+#gem 'coffee-script'
 
 ## Uploads management
 gem 'carrierwave'
