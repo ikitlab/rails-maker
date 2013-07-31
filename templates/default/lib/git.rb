@@ -1,22 +1,38 @@
-
+### GIT
 git :init
+ 
+run "rm .gitignore"
 
-run 'rm .gitignore'
-
-create_file '.gitignore' do
-
-<<-FILE
-.bundle
-.DS_Store
-log/*.log
-tmp/**/*
+file '.gitignore', <<-END
+# Ignore bundler config
+/.bundle
+ 
+# Ignore the default SQLite database.
+/db/*.sqlite3
+ 
 config/database.yml
-db/*.sqlite3
+ 
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+ 
+/public/uploads
+/public/assets
+ 
+# Ignore Rubymine project files
+.idea/
+ 
+# Ignore Ctags file
+.tags
+ 
+.rvmrc
+.zeus.sock
+.DS_Store
 public/system/**/**/**/*
-.idea/*
 .sass-cache/**/*
 *.swp
-public/uploads
-FILE
-
-end
+ 
+# Ignore sublime workspace files
+*.sublime-project
+*.sublime-workspace
+END

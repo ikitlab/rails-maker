@@ -51,11 +51,7 @@ apply File.expand_path("../authentication/user_auth_model.rb", __FILE__)
 generate(:migration, "AddNameToUsers name:string")
 generate(:migration, "AddDeletedAtToUsers deleted_at:datetime")
 
-
-
-if options[:omniauth]
-  apply File.expand_path("../authentication/omniauth.rb", __FILE__)
-end
+apply File.expand_path("../authentication/omniauth.rb", __FILE__)
 
 apply File.expand_path("../authentication/header_login_items.rb", __FILE__)
 
