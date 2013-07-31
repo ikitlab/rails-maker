@@ -27,7 +27,8 @@ module RailsMaker
         rails new #{project} \
           --template=#{RailsMaker::GEM_ROOT}/templates/#{template_name}/bootstrap.rb \
           --skip-test-unit \
-          --skip-prototype
+          --skip-prototype \
+          --skip-bundle
       COMMAND
 
     end
