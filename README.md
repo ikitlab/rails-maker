@@ -26,6 +26,10 @@ We hope it saves you a mess of time!
 
         rails-maker new my_app async
 
+* Base: A Rails application with the basic setup of gems, including newrelic, sidekiq, raven.l2, and rspec.
+
+        rails-maker new my_app base
+
 
 ### Quick Start
 

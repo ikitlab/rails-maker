@@ -25,7 +25,7 @@ module RailsMaker
       # Execute the template
       exec(<<-COMMAND)
         rails new #{project} \
-          --template=#{RailsMaker::GEM_ROOT}/templates/#{template_name}/bootstrap.rb \
+          --template=#{RailsMaker::GEM_ROOT}/templates/#{template_name}/#{template_name}.rb \
           --skip-test-unit \
           --skip-prototype
       COMMAND
