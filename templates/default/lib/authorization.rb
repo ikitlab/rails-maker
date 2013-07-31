@@ -1,3 +1,5 @@
+say '## AUTHORIZATION >>'
+
 say 'Building roles..'
 
 run 'rails g rolify:role Role User'

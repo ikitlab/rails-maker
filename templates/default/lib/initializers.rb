@@ -1,4 +1,4 @@
- ## INITIALIZERS
+say '## INITIALIZERS >>'
  
 initializer 'raven.rb', <<-END
 require 'raven'

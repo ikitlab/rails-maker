@@ -1,4 +1,4 @@
-##  GEMFILE
+say '## GEMFILE >>'
 
 run "rm Gemfile"
 file 'Gemfile'

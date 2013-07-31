@@ -1,3 +1,5 @@
+say '## APPLICATION LAYOUT >>'
+
 run 'mkdir app/views/shared'
 
 create_file 'app/views/shared/_header.html.haml' do

@@ -1,4 +1,5 @@
-say "Building admin"
+say '## ADMIN >>'
+
 generate(:controller, "admin/dashboard index")
 
 # Do layout and SASS stuff

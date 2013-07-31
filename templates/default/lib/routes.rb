@@ -1,3 +1,5 @@
+say '## ROUTES >>'
+
 run 'rm config/routes.rb'
 
 create_file 'config/routes.rb' do

@@ -1,4 +1,5 @@
-### GIT
+say '## GIT >>'
+
 git :init
  
 run "rm .gitignore"

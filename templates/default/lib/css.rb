@@ -1,3 +1,5 @@
+say '## CSS >>'
+
 create_file 'app/assets/stylesheets/reset.css' do
 <<-FILE
 html, body, div, span, object, iframe,

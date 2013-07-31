@@ -1,4 +1,4 @@
-## DB
+say '## DB >>'
 
 run 'rm config/database.yml'
 
