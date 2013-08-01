@@ -1,32 +1,25 @@
-
-say "db: #{options[:db]}, user: #{options[:db_user]}, pass: #{options[:db_pass]}"
-say "authentication: #{options[:authentication]}, omniauth: #{options[:omniauth]}, authorization: #{options[:authorization]}, admin: #{options[:admin]}"
+say '## DB >>'
 
 run 'rm config/database.yml'
 
-create_file 'config/database.yml' do
-<<-RUBY
-common: &common
+file 'config/example-databse.yml', <<-END
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  pool: 25
+  username: username
+  password: password
   host: localhost
-  adapter: #{options[:db]}
-  encoding: utf8
-  username: #{options[:db_user]}
-  password: #{options[:db_pass]}
-
+ 
 development:
-  <<: *common
-  database: #{app_name.downcase}_development
-
+  <<: *defaults
+  database: dev_#{ARGV[0].underscore}
+ 
 test:
-  <<: *common
-  database: #{app_name.downcase}_test
-
+  <<: *defaults
+  database: test_#{ARGV[0].underscore}
+ 
 production:
-  <<: *common
-  database: #{app_name.downcase}_production
-RUBY
-end
-
-run 'rake db:migrate'
-run 'rake db:seed' if options[:admin]
-run 'rake db:test:prepare'
+  <<: *defaults
+  database: prod_#{ARGV[0].underscore}
+END
