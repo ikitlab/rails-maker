@@ -2,9 +2,9 @@ say '## GEMFILE >>'
 
 run "rm Gemfile"
 file 'Gemfile'
- 
+
 add_source 'https://rubygems.org'
- 
+
 gem 'rails'
 ## database gem
 gem 'pg'
@@ -14,19 +14,21 @@ gem 'simple_form'
 gem 'settingslogic'
 ## pagination
 gem 'kaminari'
- 
+
 gem 'state_machine'
 ## templates language
 gem 'haml'
- 
+
 gem 'wirble'
 gem 'letter_opener'
 gem 'meta_request'
 ## authentication
 gem 'devise'
+## authorization
+gem 'cancan'
 ## image uploading
 gem 'carrierwave'
- 
+
 gem 'progressbar'
 gem 'awesome_print'
 ## error catching
@@ -37,15 +39,17 @@ gem "sinatra", require: false
 gem "slim"
 ### monitoring
 gem 'newrelic_rpm'
- 
-gem_group :assets do
-  gem 'sass-rails'
+gem 'turbolinks'
+
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'sass-rails'
+gem 'bootstrap-sass'
+gem_group :assets do 
   gem 'compass-rails'
   gem "uglifier"
-  gem 'coffee-rails'
-  gem 'jquery-rails'
 end
- 
+
 gem_group :development do
   ## better console
   gem "pry-rails"
@@ -58,12 +62,12 @@ gem_group :development do
   gem "capistrano-ext"
   gem "capistrano_colors"
 end
- 
+
 gem_group :test, :development do
   ## test gems
   gem "rspec-rails"
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
- 
+
 run 'bundle install'

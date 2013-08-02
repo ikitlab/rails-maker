@@ -1,7 +1,5 @@
 say '## DB >>'
 
-run 'rm config/database.yml'
-
 file 'config/example-databse.yml', <<-END
 defaults: &defaults
   adapter: postgresql
@@ -10,16 +8,16 @@ defaults: &defaults
   username: username
   password: password
   host: localhost
- 
+
 development:
   <<: *defaults
-  database: dev_#{ARGV[0].underscore}
- 
+  database: dev_#{app_name.underscore}
+
 test:
   <<: *defaults
-  database: test_#{ARGV[0].underscore}
- 
+  database: test_#{app_name.underscore}
+
 production:
   <<: *defaults
-  database: prod_#{ARGV[0].underscore}
+  database: prod_#{app_name.underscore}
 END
