@@ -5,7 +5,7 @@ file 'Gemfile'
 
 add_source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 2.0'
 ## database gem
 gem 'pg'
 ## form builder
@@ -39,11 +39,9 @@ gem "sinatra", require: false
 gem "slim"
 ### monitoring
 gem 'newrelic_rpm'
-gem 'turbolinks'
 
 gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-rails', "~> 2.3.0"
 gem 'sass-rails'
 gem 'bootstrap-sass'
 gem_group :assets do 

@@ -5,9 +5,8 @@ gsub_file 'app/assets/javascripts/application.js', /\/\/= require_tree ./, ''
 file 'app/assets/javascripts/admin.js', <<-END
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery-ui
 //= require bootstrap
-//= require turbolinks
 END
 # admin stylesheet
 gsub_file 'app/assets/stylesheets/application.css', /\*= require_tree ./, ''
