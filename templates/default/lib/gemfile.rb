@@ -46,6 +46,11 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails'
 gem 'bootstrap-sass'
+
+gem_group :production do
+  gem 'unicorn'
+end
+
 gem_group :assets do 
   gem 'compass-rails'
   gem "uglifier"
@@ -62,6 +67,7 @@ gem_group :development do
   gem "capistrano"
   gem "capistrano-ext"
   gem "capistrano_colors"
+  gem 'crecipes', git: "https://github.com/umerkulovb/crecipes"
 end
 
 gem_group :test, :development do

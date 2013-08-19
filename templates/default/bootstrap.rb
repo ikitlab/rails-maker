@@ -9,6 +9,7 @@ files << 'initializers'
 files << 'simple_routes'
 files << 'public_layout'
 files << 'admin_part'
+files << 'capistranos'
 
 files.each do |file|
   apply File.expand_path("../lib/#{file}.rb", __FILE__)
@@ -32,8 +33,10 @@ say <<-D
   4 - in terminal change your directory to application root
   5 - run 'rake db:create'
   6 - run 'rails generate devise:install' and 'rails generate devise User'
-  7 - run 'rake db:migrate'
-  8 - run 'rails s' from your project directory
+  7 - look at and correct config/deploy.rb file
+  8 - run 'rake db:migrate'
+  9 - run 'rails s' from your project directory
+  10 - to deploy you have to run cap unicorn:install, cap deploy:migrations, after updates - cap deploy:update and cap unicorn:restart
 
   ########################################################################
 D
