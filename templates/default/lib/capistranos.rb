@@ -30,4 +30,4 @@ create_file 'config/deploy.rb', <<-END
   require 'bundler/capistrano'
 END
 
-append_file 'config/deploy.rb', "\nrequire 'crecipes'\n"
+append_file 'Capfile', "\nrequire 'crecipes'\n"
