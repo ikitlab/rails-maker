@@ -1,6 +1,6 @@
 say '## CAPISTRANOS >>'
 
-run 'capify'
+run 'capify .'
 
 run "rm config/deploy.rb"
 create_file 'config/deploy.rb', <<-END
