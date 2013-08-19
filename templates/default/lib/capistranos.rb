@@ -14,7 +14,7 @@ create_file 'config/deploy.rb', <<-END
   set :user, '#{app_name}'
   set :password, "your-project-user-password"
 
-  set :deploy_to, "/home/#{user}/apps/#{application}/"
+  set :deploy_to, "/home/\#{user}/apps/\#{application}/"
 
   set :db_adapter, "postgresql"
   set :db_pool, 100
