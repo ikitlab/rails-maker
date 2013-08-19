@@ -67,6 +67,7 @@ gem_group :development do
   gem "capistrano"
   gem "capistrano-ext"
   gem "capistrano_colors"
+  gem "rvm-capistrano"
   gem 'crecipes', git: "https://github.com/umerkulovb/crecipes"
 end
 
