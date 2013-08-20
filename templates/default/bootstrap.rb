@@ -36,7 +36,7 @@ say <<-D
   7 - look at and correct config/deploy.rb file
   8 - run 'rake db:migrate'
   9 - run 'rails s' from your project directory
-  10 - to deploy you have to run cap unicorn:setup, cap deploy:setup, cap deploy:migrations, after updates - cap deploy:update and cap unicorn:restart
+  10 - to deploy you have to run cap unicorn:setup, cap deploy:setup, cap deploy:migrations, cap sidekiq:start, after updates - cap deploy:update and cap unicorn:restart
 
   ########################################################################
 D
