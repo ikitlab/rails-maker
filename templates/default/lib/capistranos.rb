@@ -30,7 +30,7 @@ create_file 'config/deploy.rb', <<-END
   require 'bundler/capistrano'
   require 'sidekiq/capistrano'
 
-  set :sidekiq_pid, "\#{current_path}/pids/sidekiq.pid"
+  set :sidekiq_pid, "\#{deploy_to}shared/pids/sidekiq.pid"
 END
 
 append_file 'Capfile', "\nrequire 'crecipes'\n"
