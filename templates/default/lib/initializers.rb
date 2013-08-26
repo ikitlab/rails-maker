@@ -8,12 +8,12 @@ Raven.configure do |config|
 end
 END
 
-create_file 'config/sidekiq.yml', <<-END
-  ---
-  :concurrency: 5
-  :pidfile: tmp/pids/sidekiq.pid
-  staging:
-    :concurrency: 10
-  production:
-    :concurrency: 50
-END
+# create_file 'config/sidekiq.yml', <<-END
+#   ---
+#   :concurrency: 5
+#   :pidfile: tmp/pids/sidekiq.pid
+#   staging:
+#     :concurrency: 10
+#   production:
+#     :concurrency: 50
+# END
