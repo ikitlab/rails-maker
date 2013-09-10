@@ -1,6 +1,6 @@
 say '## DB >>'
 
-file 'config/example-databse.yml', <<-END
+file 'config/example-database.yml', <<-END
 defaults: &defaults
   adapter: postgresql
   encoding: unicode
